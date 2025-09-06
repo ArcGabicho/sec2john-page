@@ -72,6 +72,7 @@ Para obtener una copia local en funcionamiento, siga estos sencillos pasos de ej
 |   |   └── Footer.astro
 |   |   └── Header.astro
 |   |   └── Musica.astro
+|   |   └── PaginatedTable.astro
 │   |   └── SobreMi.astro
 │   ├── data/
 │   │   └── sec2john.json -- Scrapear esto me dio depresión

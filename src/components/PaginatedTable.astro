@@ -1,0 +1,121 @@
+---
+interface Props {
+  data: any[];
+}
+
+const { data } = Astro.props;
+const itemsPerPage = 10;
+---
+
+<div id="paginated-table">
+    <div class="card overflow-hidden">
+        <div class="overflow-x-auto">
+            <table class="w-full text-left text-sm">
+                <thead class="table-header">
+                    <tr class="text-gray-400">
+                        <th class="px-6 py-4 font-normal">Título del vídeo</th>
+                        <th class="px-6 py-4 font-normal">Fecha</th>
+                        <th class="px-6 py-4 font-normal">Descripción</th>
+                        <th class="px-6 py-4 font-normal">Tags</th>
+                        <th class="px-6 py-4 font-normal">Links</th>
+                    </tr>
+                </thead>
+                <tbody id="table-body">
+                    <!-- Rows will be injected by script -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="flex justify-between items-center mt-8 text-sm">
+        <span class="text-gray-400 mr-2">[~]$ ls -l</span>
+        <div id="pagination-controls" class="flex items-center">
+            <!-- Pagination controls will be injected by script -->
+        </div>
+    </div>
+</div>
+
+<style>
+    .hacker-link.active {
+        color: #4ade80; /* green-400 */
+        font-weight: bold;
+    }
+</style>
+
+<script define:vars={{ data, itemsPerPage }}>
+    const tableBody = document.getElementById('table-body');
+    const paginationControls = document.getElementById('pagination-controls');
+    let currentPage = 1;
+    const totalPages = Math.ceil(data.length / itemsPerPage);
+
+    function renderTable(page) {
+        tableBody.innerHTML = '';
+        const start = (page - 1) * itemsPerPage;
+        const end = start + itemsPerPage;
+        const paginatedData = data.slice(start, end);
+
+        for (const item of paginatedData) {
+            const row = document.createElement('tr');
+            row.className = 'table-row';
+            row.innerHTML = `
+                <td class="px-6 py-4 text-gray-100 whitespace-nowrap">${item.title}</td>
+                <td class="px-6 py-4 text-gray-400 whitespace-nowrap">${item.date}</td>
+                <td class="px-6 py-4 text-gray-300">${item.description}</td>
+                <td class="px-6 py-4">
+                    <div class="flex flex-wrap gap-1">
+                        ${item.tags.map(tag => `<a href="${tag.href}" class="tag" target="_blank">${tag.text}</a>`).join('')}
+                    </div>
+                </td>
+                <td class="px-6 py-4">
+                    <div class="flex flex-wrap gap-1">
+                        ${item.links.map(link => `<a class="icon-link" href="${link}" target="_blank"><span class="material-icons">play_circle</span></a>`).join('')}
+                    </div>
+                </td>
+            `;
+            tableBody.appendChild(row);
+        }
+    }
+
+    function renderPagination() {
+        paginationControls.innerHTML = '';
+        const prevButton = document.createElement('button');
+        prevButton.innerText = 'Prev';
+        prevButton.className = 'hacker-link px-2 cursor-pointer';
+        prevButton.disabled = currentPage === 1;
+        prevButton.addEventListener('click', () => {
+            if (currentPage > 1) {
+                currentPage--;
+                renderTable(currentPage);
+                renderPagination();
+            }
+        });
+        paginationControls.appendChild(prevButton);
+
+        for (let i = 1; i <= totalPages; i++) {
+            const pageButton = document.createElement('button');
+            pageButton.innerText = i;
+            pageButton.className = `hacker-link px-2 cursor-pointer ${i === currentPage ? 'active' : ''}`;
+            pageButton.addEventListener('click', () => {
+                currentPage = i;
+                renderTable(currentPage);
+                renderPagination();
+            });
+            paginationControls.appendChild(pageButton);
+        }
+
+        const nextButton = document.createElement('button');
+        nextButton.innerText = 'Next';
+        nextButton.className = 'hacker-link px-2 cursor-pointer';
+        nextButton.disabled = currentPage === totalPages;
+        nextButton.addEventListener('click', () => {
+            if (currentPage < totalPages) {
+                currentPage++;
+                renderTable(currentPage);
+                renderPagination();
+            }
+        });
+        paginationControls.appendChild(nextButton);
+    }
+
+    renderTable(currentPage);
+    renderPagination();
+</script>
