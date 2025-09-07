@@ -25,7 +25,7 @@ Para obtener una copia local en funcionamiento, siga estos sencillos pasos de ej
 
 1. Clona el repositorio
    ```sh
-   git clone https://github.com/your_username_/out-out.git
+   git clone https://github.com/ArcGabicho/sec2john-page.git
    ```
 2. Instala los paquetes NPM
    ```sh
