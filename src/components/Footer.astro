@@ -1,4 +1,4 @@
-<div class="flex justify-center items-center space-x-6 mt-10" id="redes">
+<div class="flex justify-center items-center space-x-6 mt-10 footer-redes" id="redes">
     <a class="icon-link text-3xl" href="https://www.tiktok.com/@sec2john" target="_blank">
         <svg class="w-7 h-7" fill="currentColor" width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.24,6V8.82a6.79,6.79,0,0,1-4-1.28v5.81A5.26,5.26,0,1,1,8,8.1a4.36,4.36,0,0,1,.72.05v2.9A2.57,2.57,0,0,0,7.64,11a2.4,2.4,0,1,0,2.77,2.38V2h2.86a4,4,0,0,0,1.84,3.38A4,4,0,0,0,17.24,6Z"></path></svg>
     </a>
@@ -28,4 +28,46 @@
     <p>© 2025 Sec2John. All rights reserved.</p>
     <p>Loading modules... done.</p>
     <p>System ready.</p>
+<style>
+    .footer-redes {
+        flex-wrap: nowrap;
+        gap: 1.5rem;
+    }
+    .footer-redes a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.25rem;
+    }
+    @media (max-width: 600px) {
+        .footer-redes {
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            justify-content: center;
+            padding: 0.5rem 0;
+        }
+        .footer-redes a {
+            min-width: 48px;
+            min-height: 48px;
+            margin-bottom: 0.5rem;
+            border-radius: 50%;
+            background: #222;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+            transition: background 0.2s, transform 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.5rem;
+        }
+        .footer-redes a:hover {
+            background: #4ade80;
+            transform: scale(1.08);
+        }
+        .footer-redes svg {
+            width: 28px !important;
+            height: 28px !important;
+            color: #e3e3e3;
+        }
+    }
+</style>
 </footer>

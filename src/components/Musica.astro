@@ -8,7 +8,7 @@
         tienes:
     </p>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-        <div class="card">
+    <div class="card tiktok-card">
             <blockquote
                 class="tiktok-embed"
                 cite="https://www.tiktok.com/@sec2john/video/7485743035167378710"
@@ -76,7 +76,7 @@
                 </a>
             </div>
         </div>
-        <div class="card">
+    <div class="card tiktok-card">
             <blockquote
                 class="tiktok-embed"
                 cite="https://www.tiktok.com/@sec2john/video/7490204336090336534"
@@ -144,7 +144,7 @@
                 </a>
             </div>
         </div>
-        <div class="card">
+    <div class="card tiktok-card">
             <blockquote
                 class="tiktok-embed"
                 cite="https://www.tiktok.com/@sec2john/video/7495394778746506518"
@@ -214,4 +214,33 @@
         </div>
     </div>
 </section>
+<style>
+    .tiktok-card {
+        position: relative;
+        overflow: hidden;
+        max-width: 100%;
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .tiktok-card .tiktok-embed {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        box-sizing: border-box;
+        margin: 0 auto;
+        display: block;
+    }
+    @media (max-width: 600px) {
+        .tiktok-card {
+            padding: 0;
+        }
+        .tiktok-card .tiktok-embed {
+            width: 100vw !important;
+            max-width: 100vw !important;
+            min-width: 0 !important;
+        }
+    }
+</style>
 <script async src="https://www.tiktok.com/embed.js"></script>
